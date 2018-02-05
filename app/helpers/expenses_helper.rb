@@ -27,9 +27,12 @@ module ExpensesHelper
 	end
 
 	def average(total,expenses)
+		if expenses.count == 0
+			divider = 1
+		else
 		divider = expenses.count
-		(total/divider)
 	end
-
+		(total/divider)
+end
 
 end

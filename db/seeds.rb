@@ -9,11 +9,12 @@
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
 
- # user1= User.create(email:"angie@one.com",password:123456)
- # user2= User.create(email:"nicolas@one.com",password: 123456)
- # user3= User.create(email:"ferney@one.com",password:123456)
+ user1= User.create(email:"angie@gmail.com",password:12345678)
+ user2= User.create(email:"nicolas@one.com",password: 123456)
+ user3= User.create(email:"ferney@one.com",password:123456)
 
-	90.times do 
+
+	90.times do
 		User.find(rand(3)+1).expenses.create(amount: Faker::Number.number(4),
 							 concept: Faker::Commerce.product_name,
 							 date: Faker::Date.backward(60),
