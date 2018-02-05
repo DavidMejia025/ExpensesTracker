@@ -15,3 +15,17 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $(".btn_submit").on('click', function(){
+      alert("hola mundo")
+    })
+});
+
+// $('form').submit(function(e){
+//   e.preventDefault()
+//   $(".btn_submit").on('click', function(){
+//     alert("hola mundo")
+//   })
+// }

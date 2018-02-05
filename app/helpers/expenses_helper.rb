@@ -20,9 +20,8 @@ module ExpensesHelper
 	#sum = Expense.where(user_id: 2).select("amount")
 
 	def summ(expenses)
-		total = 0
-			total = expenses.each do |expense|
-				expense.amount
+			total = expenses.reduce(0) do |accu, expense|
+				accu+= expense.amount
 			end
 			puts total
 		total

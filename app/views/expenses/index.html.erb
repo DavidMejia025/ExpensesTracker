@@ -18,15 +18,16 @@
     <div class="col-md-9 index-data">
       <div class="row" style="margin-top: 10px;">
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$ <%= "summ(@expenses)" %></div>
+          <div class="summary-value">$ <%= summ(@expenses) %></div>
           <div class="summary-label">Total</div>
         </diV>
         <div class="summary-box col-md-4 text-center">
+          <%=puts @expenses%>
           <div class="summary-value"><%= @expenses.count %></div>
           <div class="summary-label">Transactions</div>
         </div>
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$ <%= "average(summ(@expenses),@expenses)" %> </div>
+          <div class="summary-value">$ <%= average(summ(@expenses),@expenses) %> </div>
           <div class="summary-label">Average</div>
         </div>
       </div>
@@ -53,34 +54,34 @@
                         <div class="row">
                           <div class="col-sm-6">
                           <%=label_tag(:type_of_trans, "type of transaccion")%>
-                          <%=f.text_field :type_of_trans, class:"form-control"%>
+                          <%=f.text_field :type_of_trans, class:"type_field form-control"%>
                           </div>
 
                           <div class="col-sm-6">
                             <%=label_tag(:date, "Date")%>
                             <br>
-                            <%=f.date_select :date, class:"form-control"%>
+                            <%=f.date_select :date, class:"date_field form-control"%>
                         </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12">
                           <%=label_tag(:concept, "Concept")%>
-                          <%=f.text_field :concept, class:"form-control form-control-lg"%>
+                          <%=f.text_field :concept, class:"concept_field form-control form-control-lg"%>
                         </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
                         <%=label_tag(:category, "Category")%>
-                        <%=f.text_field :category, class:"form-control"%>
+                        <%=f.text_field :category, class:"category_field form-control"%>
                         </div>
                         <div class="col-sm-6">
                         <%=label_tag(:amount, "Amount")%>
-                        <%=f.number_field :amount, class:"form-control"%>
+                        <%=f.number_field :amount, class: "number_field", step: :any, class:"form-control"%>
                         </div>
                         </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <%=f.submit "Create Expense", class:"btn btn-primary"%>
+                        <%=f.submit "Create Expense", class:"btn_submit btn btn-primary"%>
                         <!-- <button type="button" class="btn btn-primary">Create Expense</button> -->
                       </div>
                       <%end%>

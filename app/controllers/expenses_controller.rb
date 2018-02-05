@@ -7,11 +7,17 @@ class ExpensesController < ApplicationController
   end
 
   def create
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts expense_params()
+    # puts expense_params[:amount]
     @expense = Expense.create(expense_params)
       if @expense.save
-        redirect_to expense_path(@expense.id)
+        redirect_to expenses_path(@expense.id)
       else
         @errors = @expense.errors.full_messages
+        puts @errors
+        @expenses = Expense.where(user_id: current_user.id)
+        @expense = Expense.new
         render :index
       end
   end
@@ -19,6 +25,6 @@ class ExpensesController < ApplicationController
 
   private
   def expense_params()
-    params.require(:expense).permit(:type_of_trans,:category,:concept,:amout,:date).merge(user_id: current_user.id)
+    params.require(:expense).permit(:type_of_trans,:category,:concept,:amount,:date).merge(user_id: current_user.id)
   end
 end
