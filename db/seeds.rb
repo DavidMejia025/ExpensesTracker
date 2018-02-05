@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
- category = ["Restaurante", "servicios","compras", "hogar", "educacion", "diversion" , "viajes"]
- type_of = ["compra","retiro","transferencia"," pago"]
+ category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
+ type_of = ["withdraw","Purchase"]
 
  # user1= User.create(email:"angie@one.com",password:123456)
  # user2= User.create(email:"nicolas@one.com",password: 123456)
