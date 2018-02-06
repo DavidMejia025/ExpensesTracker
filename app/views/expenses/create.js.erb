@@ -1,0 +1,14 @@
+ $(".modal").modal('hide')
+
+ $('table tbody')
+.append("<%= j render 'expense', { expense: @expense } %>");
+
+
+$('#total')
+.text("$ " + "<%= j render 'total', { expenses: @expenses } %>");
+
+$('#count')
+.text("<%= j render 'count', { expenses: @expenses } %>");
+
+$('#average')
+.text("$ " + "<%= j render 'average', { expenses: @expenses } %>");

@@ -16,16 +16,64 @@
 //= require turbolinks
 //= require_tree .
 
-$( document ).ready(function() {
-    console.log( "ready!" );
-    $(".btn_submit").on('click', function(){
-      alert("hola mundo")
-    })
-});
-
-// $('form').submit(function(e){
-//   e.preventDefault()
-//   $(".btn_submit").on('click', function(){
-//     alert("hola mundo")
+// $( document ).ready(function() {
+//   $(".modal-body").submit(function(e){
+//     e.preventDefault();
+//     console.log( "ready!" );
+//     $('.type_field').css('border-color', '')
+//     $('.date_field').css('border-color', '')
+//     $('.concept_field').css('border-color', '')
+//     $('.category_field').css('border-color', '')
+//     $('.amount_field').css('border-color', '')
+//
+//     var type = $('.type_field').val();
+//     console.log(type)
+//     var date = $('.date_field').val();
+//     var concept = $(".concept_field").val();
+//     var category = $('.category_field').val();
+//     var amount = $('.amount_field').val();
+//     var completed = true
+//
+//
+//     if(type.length > 0){
+//     }else{
+//       $('.type_field').css('border-color','#FF0000')
+//       completed = false
+//     }
+//     if(concept.length > 0){
+//     }else{
+//       $('.concept_field').css('border-color','#FF0000')
+//       completed = false
+//     }
+//     if(category.length > 0){
+//     }else{
+//       $('.category_field').css('border-color','#FF0000')
+//       completed = false
+//     }
+//     // if(amount === 123 ){
+//     // }else{
+//     //   $('.amount_field').css('border-color','#FF0000')
+//     //   completed = false
+//     // }
+//
+//     data = {expense: {"type_of_trans":type,
+//                   "date":date,
+//                   "concept":concept,
+//                   "category":category,
+//                   "amount":amount}}
+//
+//     console.log(completed)
+//     if (completed === true){
+//       alert("completed")
+//       $.ajax({
+//         url:"http://localhost:3000/expenses",
+//         type:"POST",
+//         data:data,
+//         datatype:"json",
+//       }).done(function(data){
+//         alert("hola mundo respuesta")
+//         $(".modal-body").modal('hide')
+//       })
+//     }
 //   })
-// }
+// })
