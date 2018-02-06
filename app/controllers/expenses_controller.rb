@@ -1,25 +1,19 @@
 class ExpensesController < ApplicationController
   before_action :authenticate_user!
   def index
-    puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     @tab = :expenses
     @expenses = Expense.where(user_id: current_user.id)
     @expense = Expense.new
   end
 
   def create
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts expense_params()
-    # puts expense_params[:amount]
     @expenses = Expense.where(user_id: current_user.id)
     @expense = Expense.new(expense_params)
     @expense.save!
     @prueba =3
     respond_to do |format|
-    format.js
+      format.js
     end
-
-
       # if @expense.save
       #
       # else
@@ -29,6 +23,18 @@ class ExpensesController < ApplicationController
       #   @expense = Expense.new
       #   render :index
       # end
+  end
+  def edit 
+     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
+    @expense = Expense.find(params[:id])
+      respond_to do |format|
+      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2"
+      format.js {render :edit}
+    end
+  end
+  def update
+    
+    render :index
   end
 
   def destroy

@@ -1,6 +1,6 @@
 <!-- expense = @expense -->
 
-  <tr>
+  <tr id = "expense_rows-<%=expense.id%>">
     <td class="date">
       <div class="day"><%= expense.date.day %></div>
       <div class="month"><%= month_format(expense.date.month) %></div>
@@ -17,10 +17,11 @@
     <td class="text-right" style="width: 170px;">
       <div class="amount">$ <%= expense.amount %></div>
       <div class="actions">
+        <%= link_to "Edit", edit_expense_path(expense.id), remote: true%>
         <a href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-        <%= link_to "Delete", expense_path(expense.id), method: :delete, remote: true%>
+        <%= link_to "Delete", expense, method: :delete,remote: true%>
         <a href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a>
     </td>
  </tr>
 
- 
+
