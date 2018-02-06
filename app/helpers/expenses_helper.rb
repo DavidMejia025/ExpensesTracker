@@ -20,16 +20,21 @@ module ExpensesHelper
 	#sum = Expense.where(user_id: 2).select("amount")
 
 	def summ(expenses)
-		total=expenses.reduce(0) do |accu, expense|
-			accu+=expense.amount
-		end
+			total = expenses.reduce(0) do |accu, expense|
+				accu+= expense.amount
+			end
+			puts total
 		total
 	end
 
 	def average(total,expenses)
+		if expenses.count == 0
+			divider = 1
+		else
 		divider = expenses.count
-		(total/divider)
 	end
-
+	puts total
+		(total/divider)
+end
 
 end

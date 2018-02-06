@@ -18,22 +18,29 @@
     <div class="col-md-9 index-data">
       <div class="row" style="margin-top: 10px;">
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$ <%= summ(@expenses) %></div>
+          <div class="summary-value" id="total">$ <%= render 'total', {expenses: @expenses}%></div>
           <div class="summary-label">Total</div>
         </diV>
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value"><%= @expenses.count %></div>
+          <div class="summary-value" id="count"><%= render 'count' , {expenses: @expenses} %></div>
           <div class="summary-label">Transactions</div>
         </div>
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$ <%= average(summ(@expenses),@expenses) %> </div>
+          <div class="summary-value "id="average">$ <%= render 'average' , {expenses: @expenses}%> </div>
           <div class="summary-label">Average</div>
         </div>
       </div>
 
+
       <div class="row" style="margin-top: 20px;">
         <div class="col-md-12">
-          <a href="#" class="btn btn-success pull-left"><span class="glyphicon glyphicon-plus"></span> New Expense</a>
+          <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#exampleModal">
+              <span class="glyphicon glyphicon-plus"></span>New Expense
+            </button>
+              <!-- Modal -->
+
+            <%=render 'modales'%>
+
           <h4 class="dropdown pull-right">
             <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">April 2016 <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu">
@@ -55,29 +62,9 @@
           </tr>
         </thead>
         <tbody>
-          <% @expenses.each do |expense| %> 
-            <tr>
-              <td class="date">
-                <div class="day"><%= expense.date.day %></div>
-                <div class="month"><%= month_format(expense.date.month) %></div>
-              </td>
-              <td>
-                <div>
-                  <span class="type"><%= expense.type_of_trans %></span>
-                </div>
-                <div>
-                  <span class="concept"><%= expense.concept %></span>
-                </div>
-              </td>
-              <td class="category text-right"> <%= expense.category %></td>
-              <td class="text-right" style="width: 170px;">
-                <div class="amount">$ <%= expense.amount %></div>
-                <div class="actions">
-                  <a href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                  <a href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-              </td>
-             </tr>
-            <% end %>  
+          <%@expenses.each do |expense|%>
+            <%= render 'expense', { expense: expense }%>
+          <%end%>
         </tbody>
       </table>
     </div>
