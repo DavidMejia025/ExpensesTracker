@@ -25,15 +25,13 @@ class ExpensesController < ApplicationController
       # end
   end
   def edit 
-     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
-    @expense = Expense.find(params[:id])
+    @expensee = Expense.find(params[:id])
       respond_to do |format|
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2"
-      format.js {render :edit}
+      format.js
     end
   end
   def update
-    
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
     render :index
   end
 

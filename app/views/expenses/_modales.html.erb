@@ -8,12 +8,15 @@
         </button>
       </div>
       <div class="modal-body">
+
           <%= form_for @expense, remote: true do |f| %>
 
             <div class="row">
               <div class="col-sm-6">
               <%=label_tag(:type_of_trans, "type of transaccion")%>
               <%=f.text_field :type_of_trans, class:"type_field form-control"%>
+<!--               <%= @expense.date %>
+              <%= @expense %> -->
               </div>
 
               <div class="col-sm-6">
