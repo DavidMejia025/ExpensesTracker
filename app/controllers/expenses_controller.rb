@@ -25,7 +25,7 @@ class ExpensesController < ApplicationController
       # end
   end
   def edit 
-    @expensee = Expense.find(params[:id])
+    @expense = Expense.find(params[:id])
       respond_to do |format|
       format.js
     end
@@ -38,6 +38,7 @@ class ExpensesController < ApplicationController
   def destroy
     @expense = Expense.find(params[:id])
     @expense.destroy
+    @expenses = Expense.where(user_id: current_user.id)
     respond_to do |format|
       # format.html {redirect_to expenses_path notice: "xxx"}
       format.js
