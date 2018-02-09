@@ -3,8 +3,15 @@ class ExpensesController < ApplicationController
   def index
     @tab = :expenses
     @expenses = Expense.where(user_id: current_user.id)
-    @expense = Expense.new
+    @expense = Expense.new 
   end
+
+  # def new 
+  #     @expense = Expense.new
+  #     respond_to do |format|
+  #       format.js
+  #     end
+  # end
 
   def create
     @expenses = Expense.where(user_id: current_user.id)
@@ -14,6 +21,7 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       format.js
     end
+
       # if @expense.save
       #
       # else
@@ -24,11 +32,12 @@ class ExpensesController < ApplicationController
       #   render :index
       # end
   end
+
   def edit 
     @expense = Expense.find(params[:id])
-      respond_to do |format|
+
       format.js
-    end
+
   end
   def update
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"

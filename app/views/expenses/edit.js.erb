@@ -1,6 +1,7 @@
 
    alert("Desde el js server")
- 
-  // $('#modales').html("<%= j render 'modales', { expense: @expense } %>")
+   alert(<%= @expense.id%>)
+   $('#modales').html("<%= j render 'modales', { expense: @expense } %>")
+    $(".modal").modal('show') 
 
-   $(".modal").modal('show') 
+  
