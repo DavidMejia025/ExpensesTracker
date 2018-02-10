@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-
+        <% if @expense %> 
           <%= form_for @expense, remote: true do |f| %>
 
             <div class="row">
@@ -48,6 +48,7 @@
           </div>
           <%end%>
         </div>
+      <% end %>  
     </div>
   </div>
 </div>
