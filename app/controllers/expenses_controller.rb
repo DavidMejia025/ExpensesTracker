@@ -36,12 +36,20 @@ class ExpensesController < ApplicationController
   def edit 
     @expense = Expense.find(params[:id])
 
+      respond_to do |format|
       format.js
-
+    end
   end
+
   def update
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
-    render :index
+    @expense = Expense.find(params[:id])
+    @expense.update!(expense_params)
+    @expenses = Expense.where(user_id: current_user.id)
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
