@@ -8,16 +8,23 @@
 
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
+ 
+ category.each do|cat|
+ 	Category.create!(name: cat)
+ end
+ low = Category.first.id
+ high = Category.last.id
 
- user1= User.create(email:"angie@gmail.com",password:12345678)
- user2= User.create(email:"nicolas@one.com",password: 123456)
- user3= User.create(email:"ferney@one.com",password:123456)
-
-
-	90.times do
-		User.find(rand(3)+1).expenses.create(amount: Faker::Number.number(4),
+ # user1= User.create!(email:"ang@gmail.com",password:12345678)
+ # user2= User.create!(email:"nicol@one.com",password: 123456)
+ # user3= User.create!(email:"fer@one.com",password:123456)
+ user= [User.first, User.find(7), User.last]
+ 
+	150.times do
+		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
-							 date: Faker::Date.backward(60),
+							 date: Faker::Date.backward(90),
 							 type_of_trans: type_of.sample,
-							 category: category.sample)
+							 category_id: rand(low..high)
+							 )
 	end
