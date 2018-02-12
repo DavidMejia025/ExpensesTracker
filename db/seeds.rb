@@ -8,16 +8,27 @@
 
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
+ TypeOfTran.create!(name:"Withdraw")
+ TypeOfTran.create!(name:"Purchase")
+ TypeOfTran.create!(name:"Loan")
+ low_t = TypeOfTran.first.id
 
- user1= User.create(email:"angie@gmail.com",password:12345678)
- user2= User.create(email:"nicolas@one.com",password: 123456)
- user3= User.create(email:"ferney@one.com",password:123456)
+ category.each do|cat|
+ 	Category.create!(name: cat)
+ end
+ low = Category.first.id
+ high = Category.last.id
 
-
-	90.times do
-		User.find(rand(3)+1).expenses.create(amount: Faker::Number.number(4),
+ # user1= User.create!(email:"ang@gmail.com",password:12345678)
+ # user2= User.create!(email:"nicol@one.com",password: 123456)
+ # user3= User.create!(email:"fer@one.com",password:123456)
+ user= [User.first, User.find(7), User.last]
+ 
+	150.times do
+		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
-							 date: Faker::Date.backward(60),
-							 type_of_trans: type_of.sample,
-							 category: category.sample)
+							 date: Faker::Date.backward(90),
+							 category_id: rand(low..high),
+							 type_of_tran_id:rand(low_t..low_t+2)
+							 )
 	end
