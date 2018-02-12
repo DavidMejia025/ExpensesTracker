@@ -4,20 +4,26 @@ class ExpensesController < ApplicationController
     @tab = :expenses
     @expenses = Expense.where(user_id: current_user.id)
     @expense = Expense.new 
+    @categories = Category.all
+    @types = TypeOfTran.all
+    if (params[:category_id].present?)
+      @expenses = @expenses.where(category_id: params[:category_id])
+    end
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts  params[:type_of_tran_id].present?
+    if (params[:type_of_tran_id].present?)
+      @expenses = @expenses.where(type_of_tran_id: params[:type_of_tran_id])
+    end
   end
 
-  # def new 
-  #     @expense = Expense.new
-  #     respond_to do |format|
-  #       format.js
-  #     end
-  # end
+  def show
+
+  end 
 
   def create
     @expenses = Expense.where(user_id: current_user.id)
     @expense = Expense.new(expense_params)
     @expense.save!
-    @prueba =3
     respond_to do |format|
       format.js
     end

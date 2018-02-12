@@ -7,13 +7,13 @@
     </td>
     <td>
       <div>
-        <span class="type"><%= expense.type_of_trans %></span>
+        <span class="type"><%= expense.type_of_tran.name %></span>
       </div>
       <div>
         <span class="concept"><%= expense.concept %></span>
       </div>
     </td>
-    <td class="category text-right"> <%= expense.category %></td>
+    <td class="category text-right"> <%= expense.category.name %></td>
     <td class="text-right" style="width: 170px;">
       <div class="amount">$ <%= expense.amount %></div>
       <div class="actions">
