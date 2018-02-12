@@ -8,7 +8,11 @@
 
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
- 
+ TypeOfTran.create!(name:"Withdraw")
+ TypeOfTran.create!(name:"Purchase")
+ TypeOfTran.create!(name:"Loan")
+ low_t = TypeOfTran.first.id
+
  category.each do|cat|
  	Category.create!(name: cat)
  end
@@ -24,7 +28,7 @@
 		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
 							 date: Faker::Date.backward(90),
-							 type_of_trans: type_of.sample,
-							 category_id: rand(low..high)
+							 category_id: rand(low..high),
+							 type_of_tran_id:rand(low_t..low_t+2)
 							 )
 	end

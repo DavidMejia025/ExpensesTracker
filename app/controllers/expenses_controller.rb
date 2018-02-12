@@ -9,8 +9,10 @@ class ExpensesController < ApplicationController
     if (params[:category_id].present?)
       @expenses = @expenses.where(category_id: params[:category_id])
     end
-    if (params[:type_id].present?)
-      @expenses = @expenses.where(type_id: params[:type_id])
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts  params[:type_of_tran_id].present?
+    if (params[:type_of_tran_id].present?)
+      @expenses = @expenses.where(type_of_tran_id: params[:type_of_tran_id])
     end
   end
 
