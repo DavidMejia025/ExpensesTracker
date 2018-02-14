@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212191200) do
+ActiveRecord::Schema.define(version: 20180212195015) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,16 +19,17 @@ ActiveRecord::Schema.define(version: 20180212191200) do
   end
 
   create_table "expenses", force: :cascade do |t|
+    t.string   "type_of_trans"
     t.string   "concept"
     t.date     "date"
     t.integer  "amount"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "category_id"
-    t.integer  "typeoftran_id"
+    t.integer  "type_of_tran_id"
     t.index ["category_id"], name: "index_expenses_on_category_id"
-    t.index ["typeoftran_id"], name: "index_expenses_on_typeoftran_id"
+    t.index ["type_of_tran_id"], name: "index_expenses_on_type_of_tran_id"
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 

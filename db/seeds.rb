@@ -22,8 +22,8 @@
  # user1= User.create!(email:"ang@gmail.com",password:12345678)
  # user2= User.create!(email:"nicol@one.com",password: 123456)
  # user3= User.create!(email:"fer@one.com",password:123456)
- user= [User.first, User.find(7), User.last]
- 
+ user= [User.first, User.find(2), User.last]
+
 	150.times do
 		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
