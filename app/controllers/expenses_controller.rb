@@ -23,6 +23,7 @@ end
   end
 
   def create
+    puts params
     @expenses = Expense.where(user_id: current_user.id)
     @expense = Expense.new(expense_params)
     @expense.save!
@@ -53,6 +54,7 @@ end
     @expense = Expense.find(params[:id])
     @expense.update!(expense_params)
     @expenses = Expense.where(user_id: current_user.id)
+    @expenses = @expenses.order("date DESC")
 
     respond_to do |format|
       format.js
@@ -71,7 +73,7 @@ end
 
   private
   def expense_params
-    params.require(:expense).permit(:type_of_trans,:category,:concept,:amount,:date).merge(user_id: current_user.id)
+    params.require(:expense).permit(:type_of_tran_id,:category_id,:concept,:amount,:date).merge(user_id: current_user.id)
 
   end
 

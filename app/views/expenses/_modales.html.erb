@@ -2,7 +2,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <% if @expense.date %> 
+          <h5 class="modal-title" id="exampleModalLabel">Edit your expense:</h5>
+        <%else%>
+          <h5 class="modal-title" id="exampleModalLabel">Create a new expense:</h5>
+        <% end%>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,9 +18,7 @@
             <div class="row">
               <div class="col-sm-6">
               <%=label_tag(:type_of_tran, "type of transaccion")%>
-              <%=f.text_field :type_of_tran, class:"type_field form-control"%>
-               <%= @expense.date %>
-              <%= @expense %>
+              <%= f.collection_select :type_of_tran_id, TypeOfTran.all,:id,:name, {}, class: "form-control"%>
               </div>
 
               <div class="col-sm-6">
@@ -34,7 +36,8 @@
             <div class="row">
               <div class="col-sm-6">
             <%=label_tag(:category, "Category")%>
-            <%=f.text_field :category, class:"category_field form-control"%>
+            
+            <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control" %>
             </div>
             <div class="col-sm-6">
             <%=label_tag(:amount, "Amount")%>
@@ -43,7 +46,11 @@
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <%=f.submit "Create Expense", class:"btn_submit btn btn-primary"%>
+            <% if @expense.date %>
+              <%=f.submit "Edit Expense", class:"btn_submit btn btn-primary"%>
+            <%else%>
+              <%=f.submit "Create Expense", class:"btn_submit btn btn-primary"%>
+            <%end%>
             <!-- <button type="button" class="btn btn-primary">Create Expense</button> -->
           </div>
           <%end%>

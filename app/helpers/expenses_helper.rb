@@ -75,5 +75,15 @@ end
 # 	 expenses_filter
 # end
 
-
+ def instanceName(instances)
+ 	string= ""
+ 	instances.each do |type|
+ 		name = type.name 
+ 		puts name
+ 	 	string = string.concat(""+name+""+", ")
+ 	 end
+ 	 puts "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("
+ 	 puts string
+ 	 string
+ end
 end
