@@ -3,22 +3,24 @@ class ExpensesController < ApplicationController
   def index
     @tab = :expenses
     @expenses = Expense.where(user_id: current_user.id)
-    @expense = Expense.new 
+    @expenses = @expenses.order("date DESC")
+    @expense = Expense.new
     @categories = Category.all
     @types = TypeOfTran.all
     if (params[:category_id].present?)
       @expenses = @expenses.where(category_id: params[:category_id])
     end
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts  params[:type_of_tran_id].present?
     if (params[:type_of_tran_id].present?)
       @expenses = @expenses.where(type_of_tran_id: params[:type_of_tran_id])
     end
+    if params[:date_id].present?
+      @expenses = filterDate(@expenses,params[:date_id])
   end
+end
 
   def show
 
-  end 
+  end
 
   def create
     @expenses = Expense.where(user_id: current_user.id)
@@ -39,7 +41,7 @@ class ExpensesController < ApplicationController
       # end
   end
 
-  def edit 
+  def edit
     @expense = Expense.find(params[:id])
 
       respond_to do |format|
@@ -48,11 +50,10 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
     @expense = Expense.find(params[:id])
     @expense.update!(expense_params)
     @expenses = Expense.where(user_id: current_user.id)
-    
+
     respond_to do |format|
       format.js
     end
@@ -70,9 +71,38 @@ class ExpensesController < ApplicationController
 
   private
   def expense_params
-    puts params
-    puts "***************************************************************"
     params.require(:expense).permit(:type_of_trans,:category,:concept,:amount,:date).merge(user_id: current_user.id)
 
   end
+
+
+  def filterDate(expenses,targetDate)
+    accu =[]
+  	 expenses_filter = expenses.each do |expense|
+  		 month= month_format(expense.date.month).capitalize
+  		 year = expense.date.year
+  		 dateString = "#{month} #{year}"
+  		 if targetDate == dateString
+        accu << expense
+  		 end
+  	 end
+  	 accu
+  end
+
+  def month_format(date_month)
+		month = {1 => "Jan",
+				 2 => "Feb",
+				 3 => "Mar",
+				 4 => "Apr",
+				 5 => "May",
+				 6 => "jun",
+				 7 => "Jul",
+				 8 => "Aug",
+				 9 => "Sep",
+				 10 => "Oct",
+				 11 => "Nov",
+				 12 => "Dic"}
+		month[date_month].upcase
+	end
+
 end

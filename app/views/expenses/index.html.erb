@@ -4,7 +4,7 @@
       <h4 class="filter-header">Transaction Type <span>Choose to filter</span></h4>
       <div class="list-group filter-type">
         <% @types.each do |type| %>
-          <a href="/expenses?type_of_tran_id=<%=type.id%>" class="list-group-item"><%=type.name%></a> 
+          <a href="/expenses?type_of_tran_id=<%=type.id%>" class="list-group-item"><%=type.name%></a>
         <% end %>
         <!-- more transaction types -->
       </div>
@@ -12,8 +12,7 @@
       <h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
       <div class="list-group filter-type">
         <% @categories.each do |category| %>
-
-          <a href="/expenses?category_id=<%=category.id%>" class="list-group-item"><%=category.name%></a> 
+          <a href="/expenses?category_id=<%=category.id%>" class="list-group-item"><%=category.name%></a>
         <% end %>
         <!-- more categories  -->
       </div>
@@ -44,14 +43,16 @@
             <div id="modales">
                <%= render 'modales' %>
             </div>
-            
+
 
           <h4 class="dropdown pull-right">
-            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">April 2016 <span class="caret"></span></button>
+            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown"><%=nameDate(@expenses).first%> <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation"><a href="#">April 2016</a></li>
-              <li role="presentation"><a href="#">March 2016</a></li>
+              <%nameDate(Expense.all).each do |date|%>
+              <li role="presentation"><a href="/expenses?date_id=<%=date%>"><%=date%></a></li>
               <!-- more months -->
+              <%end%>
+              <!-- <li role="presentation"><a href="#">March 2016</a></li> -->
             </ul>
           </h4>
         </div>
