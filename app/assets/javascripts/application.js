@@ -81,23 +81,41 @@
   $( document ).ready(function() {
     console.log( "ready!" );
   window.onload = function () {
-  	
-  	var datas = $('.data_information').data('datas')
+    var datas = $('.data_information').data('datas')
+
     var chart = new CanvasJS.Chart("chartContainer", {
       theme: "dark2",
       title:{
-        text: "My First Chart in CanvasJS"              
+        text: "Expenses last 3 months"
       },
-      data: [              
+      data: [
       {
         // Change type to "doughnut", "line", "splineArea", etc.
         type: "column",
         dataPoints: datas
+
       }
       ]
     });
     chart.render();
-  }
 
-  });
+    var datas = $('.data_information2').data('datas')
+    var chart = new CanvasJS.Chart("chartContainer2", {
+      theme: "dark2",
+      title:{
+        text: "Expenses last 3 months"
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas
+
+        }
+      ]
+    });
+    chart.render();
+  }
+});
+
   // </script>

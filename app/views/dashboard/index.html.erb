@@ -1,9 +1,10 @@
 <div class="container">
-  
-    <%= content_tag :div, class: "data_information", data: {datas:  data(@expenses)} do %>
-    <% end %>
+    <%= content_tag :div, class: "data_information", data: {datas:  data1(@expenses)} do %><% end %>
+    <%= content_tag :div, class: "data_information2", data: {datas:  data2(@expenses)} do %><% end %>
 
-  <div class="row">
+
+
+    <div class="row">
     <div class="total-box col-md-3">
       $200,000
       <span>HOY</span>
@@ -25,7 +26,7 @@
   <div class="row" style="margin-top: 40px;">
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Últimos 6 Meses</div>
+        <div class="panel-heading">Last 3 months</div>
         <div class="panel-body">
           <div id="chartContainer" style="height: 250px;"></div>
         </div>
@@ -33,7 +34,7 @@
     </div>
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Por Día</div>
+        <div class="panel-heading">By day</div>
         <div class="panel-body">
           <div id="chartContainer2" style="height: 250px;"></div>
         </div>
@@ -44,7 +45,7 @@
   <div class="row" style="margin-top: 10px;">
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Por Categoría</div>
+        <div class="panel-heading">By Category</div>
         <div class="panel-body">
           <div id="divchart" style="height: 250px;"></div>
         </div>
@@ -52,7 +53,7 @@
     </div>
     <div class=" box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Acumulado</div>
+        <div class="panel-heading">Acumulated</div>
         <div class="panel-body">
           <div id="month-acc" style="height: 250px;"></div>
         </div>
