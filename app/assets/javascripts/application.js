@@ -77,3 +77,27 @@
 //     }
 //   })
 // })
+// <script type="text/javascript">
+  $( document ).ready(function() {
+    console.log( "ready!" );
+  window.onload = function () {
+  	
+  	var datas = $('.data_information').data('datas')
+    var chart = new CanvasJS.Chart("chartContainer", {
+      theme: "dark2",
+      title:{
+        text: "My First Chart in CanvasJS"              
+      },
+      data: [              
+      {
+        // Change type to "doughnut", "line", "splineArea", etc.
+        type: "column",
+        dataPoints: datas
+      }
+      ]
+    });
+    chart.render();
+  }
+
+  });
+  // </script>
