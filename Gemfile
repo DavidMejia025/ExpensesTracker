@@ -30,7 +30,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'faker'
 #Authentication managment system devise
 gem 'devise'
-
+#Charts
+gem 'chartkick', '~> 1.2.4'
+gem 'groupdate', '~> 2.1.1'
+gem 'active_median', '~> 0.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
