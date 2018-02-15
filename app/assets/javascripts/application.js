@@ -115,6 +115,30 @@
       ]
     });
     chart.render();
+
+    var datas = $('.data_information2').data('datas')
+    var chart = new CanvasJS.Chart("divchart", {
+      theme: "dark2",
+      title:{
+        text: "Expenses last 3 months"
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "doughnut",
+          dataPoints: [
+			{ y: 67, label: "Inbox" },
+			{ y: 28, label: "Archives" },
+			{ y: 10, label: "Labels" },
+			{ y: 7, label: "Drafts"},
+			{ y: 15, label: "Trash"},
+			{ y: 6, label: "Spam"}
+		]
+
+        }
+      ]
+    });
+    chart.render();
   }
 });
 

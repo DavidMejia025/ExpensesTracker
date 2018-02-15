@@ -13,10 +13,15 @@ module DashboardHelper
 
 		accu = []
 		dataTest.each do |expense|
-			accu << {x: 1, y: expense}
-		end
+			expense.each_with_index do |data,i|
+				month = checkMonth(month_0-i)
+				year = checkYear(year_0, month_0-i)
+					accu << {x: month, y: data}
+				end
+			end
 		accu
 	end
+
 
 	def transactionData(expenses,month_0,year_0,i)
 	expensesByTransaction = filterByTransaction(expenses, i)
