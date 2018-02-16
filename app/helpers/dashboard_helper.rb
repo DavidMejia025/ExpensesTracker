@@ -33,13 +33,13 @@ module DashboardHelper
 		TypeOfTran.all.each do |tran|
 			dataTest << transactionData(expenses,month_0,year_0,tran.id)
 		end
-
 		accu = []
 		dataTest.each do |expense|
 			expense.each_with_index do |data,i|
-				month = checkMonth(month_0-i)
-				year = checkYear(year_0, month_0-i)
-					accu << {x: month, y: data}
+				month = checkMonth(month_0-2+i)
+				year = checkYear(year_0, month_0-2+i)
+					# accu << {x: month, y: data}
+					accu << {label: month_format(month), y: data}
 				end
 			end
 		accu
