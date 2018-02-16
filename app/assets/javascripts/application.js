@@ -81,47 +81,81 @@
   $( document ).ready(function() {
     console.log( "ready!" );
   window.onload = function () {
-  	
-  	var datas = $('.data_information').data('datas')
-  	console.log(datas)
+    var datas = $('.data_information').data('datas')
     var chart = new CanvasJS.Chart("chartContainer", {
       theme: "dark2",
       title:{
-        text: "My First Chart in CanvasJS"              
+        text: "Expenses last 3 months"
       },
-      data: [              
+      data: [
       {
         // Change type to "doughnut", "line", "splineArea", etc.
         type: "column",
         dataPoints: datas
+
       }
       ]
     });
     chart.render();
 
+    var datas = $('.data_information2').data('datas')
     var chart = new CanvasJS.Chart("chartContainer2", {
       theme: "dark2",
       title:{
-        text: "My First Chart in CanvasJS"              
+        text: "Expenses last 3 months"
       },
-      data: [              
-      {
-        // Change type to "doughnut", "line", "splineArea", etc.
-        type: "column",
-        dataPoints: [
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas
 
-          { label: "apple",  y: 10  },
-          { label: "orange", y: 15  },
-          { label: "banana", y: 25  },
-          { label: "mango",  y: 30  },
-          { label: "grape",  y: 28  }
-        ]
-      }
+        }
       ]
     });
     chart.render();
 
-  }
 
-  });
+    var datas = $('.data_information3').data('datas')
+    var chart = new CanvasJS.Chart("divchart", {
+      theme: "dark2",
+      title:{
+        text: "Expenses last 3 months"
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "doughnut",
+          dataPoints: datas
+        }
+      ]
+    });
+    chart.render();
+
+    var datas = $('.data_information4').data('datas')
+    console.log(datas)
+    var chart = new CanvasJS.Chart("month-acc", {
+
+      theme: "dark2",
+      title:{
+        text: "Expenses last 3 months"
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas[0]
+        },
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas[1]
+        }
+      ]
+
+    });
+    chart.render();
+  }
+});
+
   // </script>
