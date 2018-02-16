@@ -113,33 +113,78 @@ end
 		accu
 	end
 
+	def data3(expenses)
+		data = Category.all.map do |cat|
+			item = totalAmount(filterByCategory(expenses,cat.id))
+			{label: cat.name, y:item}
+		end
+		data
+	end
+
+	def data4(expenses)
+		monthBase = expenses.first.date.month
+		month_0 = month_format(monthBase).capitalize
+		year_0 = expenses.first.date.year
+		targetDate_0 = "#{month_0} #{year_0}"
+		data_0 = filterDate(expenses, targetDate_0)
+		month_1 = month_format(checkMonth( monthBase - 1)).capitalize
+		year_1 = checkYear(year_0, monthBase - 1)
+		targetDate_1 = "#{month_1} #{year_1}"
+		data_1 = filterDate(expenses, targetDate_1)
+		expense_0 = sumExpenses(data_1)
+		sumExpenses(data_0)
+
+		accu = []
+		expense_0.each_with_index do |data, i|
+			accu << {x: i, y:data}
+		end
+		accu
+	end
+
+	def sumExpenses(expenses)
+		accu = []
+		expenses.each_with_index do |expense, i|
+		if i == 0
+			accu[i] = expense.amount
+		else
+			accu[i] = expense.amount + accu[i - 1]
+		end
+	end
+	accu
 end
 
-def filterDate(expenses,targetDate)
-	accu =[]
-	 expenses_filter = expenses.each do |expense|
-		 month= month_format(expense.date.month).capitalize
-		 year = expense.date.year
-		 dateString = "#{month} #{year}"
-		 if targetDate == dateString
-			accu << expense
+
+	def filterByCategory(expenses, categoryId)
+		expenses = expenses.where(category_id: categoryId)
+	end
+
+	def filterDate(expenses,targetDate)
+		accu =[]
+		 expenses_filter = expenses.each do |expense|
+			 month= month_format(expense.date.month).capitalize
+			 year = expense.date.year
+			 dateString = "#{month} #{year}"
+			 if targetDate == dateString
+				accu << expense
+			 end
 		 end
-	 end
-	 accu
+		 accu
+	end
+
+	def month_format(date_month)
+		month = {1 => "Jan",
+				 2 => "Feb",
+				 3 => "Mar",
+				 4 => "Apr",
+				 5 => "May",
+				 6 => "jun",
+				 7 => "Jul",
+				 8 => "Aug",
+				 9 => "Sep",
+				 10 => "Oct",
+				 11 => "Nov",
+				 12 => "Dic"}
+		month[date_month].upcase
 end
 
-def month_format(date_month)
-	month = {1 => "Jan",
-			 2 => "Feb",
-			 3 => "Mar",
-			 4 => "Apr",
-			 5 => "May",
-			 6 => "jun",
-			 7 => "Jul",
-			 8 => "Aug",
-			 9 => "Sep",
-			 10 => "Oct",
-			 11 => "Nov",
-			 12 => "Dic"}
-	month[date_month].upcase
 end
