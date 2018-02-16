@@ -108,7 +108,19 @@
         {
           // Change type to "doughnut", "line", "splineArea", etc.
           type: "column",
-          dataPoints: datas
+          dataPoints: datas[0]
+
+        },
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas[1]
+
+        },
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas[2]
 
         }
       ]
@@ -138,18 +150,21 @@
 
       theme: "dark2",
       title:{
-        text: "Expenses last 3 months"
+        text: "Two months expenses record"
       },
       data: [
         {
           // Change type to "doughnut", "line", "splineArea", etc.
-          type: "column",
-          dataPoints: datas[0]
+          type: "area",
+          markerType: "none",
+          dataPoints: datas[1]
         },
         {
           // Change type to "doughnut", "line", "splineArea", etc.
-          type: "column",
-          dataPoints: datas[1]
+          type: "area",
+          color: "rgba(40,175,101,0.6)",
+          markerType: "none",
+          dataPoints: datas[0]
         }
       ]
 

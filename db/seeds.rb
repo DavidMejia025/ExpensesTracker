@@ -12,6 +12,7 @@
  TypeOfTran.create!(name:"Purchase")
  TypeOfTran.create!(name:"Loan")
  low_t = TypeOfTran.first.id
+ high_t = TypeOfTran.last.id
 
  category.each do|cat|
  	Category.create!(name: cat)
@@ -22,13 +23,13 @@
  # user1= User.create!(email:"ang@gmail.com",password:12345678)
  # user2= User.create!(email:"nicol@one.com",password: 123456)
  # user3= User.create!(email:"fer@one.com",password:123456)
- user= [User.first, User.find(2), User.last]
-	150.times do
+ user= [User.first, User.find(7), User.last]
+	1000.times do
 		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
-							 date: Faker::Date.backward(90),
+							 date: Faker::Date.backward(200),
 							 category_id: rand(low..high),
-							 type_of_tran_id:rand(low_t..low_t+2)
+							 type_of_tran_id:rand(low_t..high_t)
 							 )
 	end
  
