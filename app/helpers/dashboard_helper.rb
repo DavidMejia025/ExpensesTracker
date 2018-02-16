@@ -132,10 +132,21 @@ end
 		targetDate_1 = "#{month_1} #{year_1}"
 		data_1 = filterDate(expenses, targetDate_1)
 		expense_0 = sumExpenses(data_1)
-		sumExpenses(data_0)
 
+		data = []
+		data[0] = dataSet(sumExpenses(data_0))
+		data[1] = dataSet(sumExpenses(data_1))
+		puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+		puts data[0]
+		puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+
+		data
+
+	end
+
+	def dataSet(data)
 		accu = []
-		expense_0.each_with_index do |data, i|
+		data.each_with_index do |data, i|
 			accu << {x: i, y:data}
 		end
 		accu

@@ -133,7 +133,9 @@
     chart.render();
 
     var datas = $('.data_information4').data('datas')
+    console.log(datas)
     var chart = new CanvasJS.Chart("month-acc", {
+
       theme: "dark2",
       title:{
         text: "Expenses last 3 months"
@@ -142,9 +144,15 @@
         {
           // Change type to "doughnut", "line", "splineArea", etc.
           type: "column",
-          dataPoints: datas
+          dataPoints: datas[0]
+        },
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: datas[1]
         }
       ]
+
     });
     chart.render();
   }
