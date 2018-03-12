@@ -1,5 +1,28 @@
 module DashboardHelper
 
+	def dayExpense(expenses,day)
+		monthBase = expenses.first.date.month
+		month_0 = month_format(monthBase).capitalize
+		year_0 = expenses.first.date.year
+		targetDate_0 = "#{month_0} #{year_0}"
+		data_0 = filterDateMonth(expenses, targetDate_0)
+		month_1 = month_format(checkMonth( monthBase - 1)).capitalize
+		year_1 = checkYear(year_0, monthBase - 1)
+		targetDate_1 = "#{month_1} #{year_1}"
+		data_1 = filterDateMonth(expenses, targetDate_1)
+		if day=="hoy"
+			data_0 = filterByDay(data_0)[-1]
+		elsif day=="ayer"
+			data_0 = filterByDay(data_0)[-2]
+		elsif day=="mes_actual"
+			filterByDay(data_0).sum
+		else
+			filterByDay(data_1).sum
+		end
+	end
+
+
+
 	def data1(expenses)
 		#Filter by month
 		month_0 = expenses.first.date.month
@@ -7,34 +30,34 @@ module DashboardHelper
 
 		dataTest = []
 
-		TypeOfTran.all.count.times do |i|
-			dataTest << transactionData(expenses,month_0,year_0,i+1)
+		TypeOfTran.all.each do |tran|
+			dataTest << transactionData(expenses,month_0,year_0,tran.id)
 		end
-
 		accu = []
 		dataTest.each do |expense|
 			expense.each_with_index do |data,i|
-				month = checkMonth(month_0-i)
-				year = checkYear(year_0, month_0-i)
-					accu << {x: month, y: data}
+				month = checkMonth(month_0-2+i)
+				year = checkYear(year_0, month_0-2+i)
+					# accu << {x: month, y: data}
+					accu << {label: month_format(month), y: data}
 				end
 			end
 		accu
 	end
 
 
-	def transactionData(expenses,month_0,year_0,i)
-	expensesByTransaction = filterByTransaction(expenses, i)
-
+	def transactionData(expenses,month_0,year_0,tran_id)
+	expensesByTransaction = filterByTransaction(expenses, tran_id)
 	expensesMonthCero = filterByMonth(expensesByTransaction, month_0, year_0, 0)
 	expensesMonthOne = filterByMonth(expensesByTransaction, month_0, year_0, 1)
 	expensesMonthTwo = filterByMonth(expensesByTransaction, month_0, year_0, 2)
-
-
 	dataTest = [totalAmount(expensesMonthCero),
 	totalAmount(expensesMonthOne),
 	totalAmount(expensesMonthTwo)]
+	end
 
+	def filterByTransaction(expenses, transaction)
+		expenses = expenses.where(type_of_tran_id: transaction)
 	end
 
 	def totalAmount(expenses)
@@ -47,31 +70,27 @@ module DashboardHelper
 	def filterByMonth(expenses, month_0, year_0, i)
 
 				filterExpenses =[]
-
 					if i == 0
 						month = month_format(expenses.first.date.month).capitalize
 						targetDate = "#{month} #{year_0}"
-						filterExpenses = filterDate(expenses, targetDate)
+						filterExpenses = filterDateMonth(expenses, targetDate)
 					elsif i == 1
 						months = month_0 - i
 						month = checkMonth(months)
 						year = checkYear(year_0, months)
 						month = month_format(month).capitalize
 						targetDate = "#{month} #{year}"
-					filterExpenses2 = filterDate(expenses, targetDate)
+					filterExpenses2 = filterDateMonth(expenses, targetDate)
 					elsif i == 2
 						months = month_0 - i
 						month = checkMonth(months)
 						year = checkYear(year_0, months)
 						month = month_format(month).capitalize
 						targetDate = "#{month} #{year}"
-					filterExpenses3 = filterDate(expenses, targetDate)
+					filterExpenses3 = filterDateMonth(expenses, targetDate)
 						end
 			end
 
-			def filterByTransaction(expenses, transaction)
-				expenses = expenses.where(type_of_tran_id: transaction)
-			end
 
 	def checkMonth(month)
 		if month == 0
@@ -105,12 +124,19 @@ end
 		month = month_format(expenses.first.date.month).capitalize
 		year = expenses.first.date.year
 		targetDate = "#{month} #{year}"
-		expenses = filterDate(expenses, targetDate)
-		accu = []
-		expenses.each do |expense|
-			accu << {x: expense.date.day, y: expense.amount}
+		expenses = filterDateMonth(expenses, targetDate)
+		data_set = []
+		TypeOfTran.all.each_with_index do |type,i|
+			accu = []
+		    expenses.map do |expense|
+				if expense.type_of_tran_id == type.id
+					accu<<{x: expense.date.day, y: expense.amount}
+				end
+				accu
+			end
+			data_set[i] = accu
 		end
-		accu
+		data_set
 	end
 
 	def data3(expenses)
@@ -126,24 +152,31 @@ end
 		month_0 = month_format(monthBase).capitalize
 		year_0 = expenses.first.date.year
 		targetDate_0 = "#{month_0} #{year_0}"
-		data_0 = filterDate(expenses, targetDate_0)
+		data_0 = filterDateMonth(expenses, targetDate_0)
 		month_1 = month_format(checkMonth( monthBase - 1)).capitalize
 		year_1 = checkYear(year_0, monthBase - 1)
 		targetDate_1 = "#{month_1} #{year_1}"
-		data_1 = filterDate(expenses, targetDate_1)
-		expense_0 = sumExpenses(data_1)
-
+		data_1 = filterDateMonth(expenses, targetDate_1)
 		data = []
-		data[0] = dataSet(sumExpenses(data_0))
-		data[1] = dataSet(sumExpenses(data_1))
-		puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-		puts data[0]
-		puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-
+		data[0] = dataSet(sumExpenses(filterByDay(data_0)))
+		data[1] = dataSet(sumExpenses(filterByDay(data_1)))
 		data
 
 	end
 
+	def filterByDay(expenses)
+		day_0 = expenses.first.date.day
+		data = []
+		day_0.times do |day|
+			data[day] = 0
+			expenses.each do |expense|
+				if expense.date.day == day+1
+					data[day] += expense.amount
+				end
+			end
+		end
+		data
+	end
 	def dataSet(data)
 		accu = []
 		data.each_with_index do |data, i|
@@ -156,9 +189,9 @@ end
 		accu = []
 		expenses.each_with_index do |expense, i|
 		if i == 0
-			accu[i] = expense.amount
+			accu[i] = expense
 		else
-			accu[i] = expense.amount + accu[i - 1]
+			accu[i] = expense + accu[i - 1]
 		end
 	end
 	accu
@@ -169,7 +202,7 @@ end
 		expenses = expenses.where(category_id: categoryId)
 	end
 
-	def filterDate(expenses,targetDate)
+	def filterDateMonth(expenses,targetDate)
 		accu =[]
 		 expenses_filter = expenses.each do |expense|
 			 month= month_format(expense.date.month).capitalize

@@ -8,19 +8,19 @@
 
     <div class="row">
     <div class="total-box col-md-3">
-      $200,000
+      $ <%= dayExpense(@expenses,"hoy") %>
       <span>HOY</span>
     </div>
     <div class="total-box col-md-3">
-      $140,000
+      $<%= dayExpense(@expenses,"ayer") %>
       <span>AYER</span>
     </div>
     <div class="total-box col-md-3">
-      $7,500,000
+      $<%= dayExpense(@expenses,"mes_actual") %>
       <span>ESTE MES</span>
     </div>
     <div class="total-box col-md-3">
-      $6,200,000
+      $<%= dayExpense(@expenses,"anterior") %>
       <span>MES PASADO</span>
     </div>
   </div>
