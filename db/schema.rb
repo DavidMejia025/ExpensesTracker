@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20180212195015) do
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.string   "type_of_trans"
     t.string   "concept"
     t.date     "date"
     t.integer  "amount"
