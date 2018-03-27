@@ -27,7 +27,6 @@ module DashboardHelper
 		#Filter by month
 		month_0 = expenses.first.date.month
 		year_0 = expenses.first.date.year
-
 		dataTest = []
 
 		TypeOfTran.all.each do |tran|
@@ -70,6 +69,7 @@ module DashboardHelper
 	def filterByMonth(expenses, month_0, year_0, i)
 
 				filterExpenses =[]
+
 					if i == 0
 						month = month_format(expenses.first.date.month).capitalize
 						targetDate = "#{month} #{year_0}"
