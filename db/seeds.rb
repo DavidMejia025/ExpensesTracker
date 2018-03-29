@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'faker'
+
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
  TypeOfTran.create!(name:"Withdraw")
@@ -23,7 +25,7 @@
  # user1= User.create!(email:"ang@gmail.com",password:12345678)
  # user2= User.create!(email:"nicol@one.com",password: 123456)
  # user3= User.create!(email:"fer@one.com",password:123456)
- user= [User.first, User.find(7), User.last]
+ user= [User.first, User.find(4), User.last]
 	1000.times do
 		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
@@ -32,5 +34,3 @@
 							 type_of_tran_id:rand(low_t..high_t)
 							 )
 	end
-
- 
