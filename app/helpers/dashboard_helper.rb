@@ -17,7 +17,11 @@ module DashboardHelper
 		elsif day=="mes_actual"
 			filterByDay(data_0).sum
 		else
-			filterByDay(data_1).sum
+      unless data_1==nil || data_1 == []
+			  filterByDay(data_1).sum
+      else
+        data_1=0;
+      end
 		end
 	end
 
@@ -158,8 +162,16 @@ end
 		targetDate_1 = "#{month_1} #{year_1}"
 		data_1 = filterDateMonth(expenses, targetDate_1)
 		data = []
+    byebug
 		data[0] = dataSet(sumExpenses(filterByDay(data_0)))
-		data[1] = dataSet(sumExpenses(filterByDay(data_1)))
+    unless data_1 == nil || data_1 == []
+      byebug
+      data[1] = dataSet(sumExpenses(filterByDay(data_1)))
+    else
+      byebug
+      data[1] = 0
+    end
+		
 		data
 
 	end

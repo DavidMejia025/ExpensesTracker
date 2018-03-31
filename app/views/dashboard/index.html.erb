@@ -6,11 +6,11 @@
     <%= content_tag :div, class: "data_information4", data: {datas:  data4(@expenses)} do %><% end %>
  <% end %>
 
-
     <div class="row">
     <div class="total-box col-md-3">
       <% if @expenses.first %>
-        $ <%= dayExpense(@expenses,"hoy") %>
+
+        <p class="hoy1">$<%= dayExpense(@expenses,"hoy") %></p>
       <span>HOY</span>
     <% end %>
     </div>
