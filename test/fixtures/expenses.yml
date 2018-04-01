@@ -1,13 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  index,update,edit,: MyString
-  create,: MyString
-  delete,: MyString
-  update: MyString
+<% 1.upto(1000) do |i| %>
+  expense_<%= i %>:
+    concept: "Food" 
+    amount: 345
+    category_id: 2 
+    type_of_tran_id: 1
+    user_id: 1
+    date: 12/4/2017
+<% end %>
+     
 
-two:
-  index,update,edit,: MyString
-  create,: MyString
-  delete,: MyString
-  update: MyString
+one:
+    name: "Andres"
+    expenses: [expense_1, expense_2]
