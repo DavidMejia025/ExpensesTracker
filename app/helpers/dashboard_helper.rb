@@ -51,6 +51,7 @@ module DashboardHelper
 
 
 	def transactionData(expenses,month_0,year_0,tran_id)
+    byebug
 	expensesByTransaction = filterByTransaction(expenses, tran_id)
 	expensesMonthCero = filterByMonth(expensesByTransaction, month_0, year_0, 0)
 	expensesMonthOne = filterByMonth(expensesByTransaction, month_0, year_0, 1)
@@ -62,6 +63,9 @@ module DashboardHelper
 
 	def filterByTransaction(expenses, transaction)
 		expenses = expenses.where(type_of_tran_id: transaction)
+    if expenses == []
+      expenses = [0]
+    end
 	end
 
 	def totalAmount(expenses)
