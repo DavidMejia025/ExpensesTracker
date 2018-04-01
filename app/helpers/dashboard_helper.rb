@@ -31,13 +31,24 @@ module DashboardHelper
 		#Filter by month
 		month_0 = expenses.first.date.month
 		year_0 = expenses.first.date.year
-
 		dataTest = []
 
 		TypeOfTran.all.each do |tran|
-			dataTest << transactionData(expenses,month_0,year_0,tran.id)
+		tran_id_exist = false
+			expenses.each do |expense|
+				if expense.type_of_tran_id == tran.id
+					tran_id_exist = true
+				end
+			end
+				if tran_id_exist
+					dataTest << transactionData(expenses,month_0,year_0,tran.id)
+				else
+					dataTest << [0,0,0]
+				end
 		end
+
 		accu = []
+
 		dataTest.each do |expense|
 			expense.each_with_index do |data,i|
 				month = checkMonth(month_0-2+i)
@@ -70,13 +81,16 @@ module DashboardHelper
 
 	def totalAmount(expenses)
 			probe = expenses.reduce(0) do |accu,expense|
-			accu += expense.amount
+			 unless expense == 0 || expense == [0]
+				 accu += expense.amount
+			 else
+				 accu += 0
+			 end
 		end
 			probe
 	end
 
 	def filterByMonth(expenses, month_0, year_0, i)
-
 				filterExpenses =[]
 					if i == 0
 						month = month_format(expenses.first.date.month).capitalize
@@ -137,9 +151,13 @@ end
 		TypeOfTran.all.each_with_index do |type,i|
 			accu = []
 		    expenses.map do |expense|
-				if expense.type_of_tran_id == type.id
-					accu<<{x: expense.date.day, y: expense.amount}
-				end
+					unless expense == 0 || expense == [0]
+						if expense.type_of_tran_id == type.id
+							accu<<{x: expense.date.day, y: expense.amount}
+						end
+						else
+						accu<<{x: 0, y: 0}
+					end
 				accu
 			end
 			data_set[i] = accu
@@ -166,7 +184,6 @@ end
 		targetDate_1 = "#{month_1} #{year_1}"
 		data_1 = filterDateMonth(expenses, targetDate_1)
 		data = []
-    byebug
 		data[0] = dataSet(sumExpenses(filterByDay(data_0)))
     unless data_1 == nil || data_1 == []
       byebug
@@ -181,35 +198,51 @@ end
 	end
 
 	def filterByDay(expenses)
-		day_0 = expenses.first.date.day
-		data = []
-		day_0.times do |day|
-			data[day] = 0
-			expenses.each do |expense|
-				if expense.date.day == day+1
-					data[day] += expense.amount
+		unless expenses == [0] || expenses.first == [0]
+			day_0 = expenses.first.date.day
+			data = []
+			day_0.times do |day|
+				data[day] = 0
+				expenses.each do |expense|
+						unless expense == [0]
+							if expense.date.day == day+1
+								data[day] += expense.amount
+							end
+						else
+							data = [0]
+						end
 				end
 			end
+		else
+			data = [0];
 		end
 		data
 	end
 	def dataSet(data)
 		accu = []
-		data.each_with_index do |data, i|
-			accu << {x: i, y:data}
-		end
+		unless data==[0]
+			data.each_with_index do |data, i|
+				accu << {x: i, y:data}
+			end
+		else
+			 accu << {x: 1, y:0}
+		 end
 		accu
 	end
 
 	def sumExpenses(expenses)
 		accu = []
-		expenses.each_with_index do |expense, i|
-		if i == 0
-			accu[i] = expense
+		unless expenses == [0]
+			expenses.each_with_index do |expense, i|
+				if i == 0
+					accu[i] = expense
+				else
+					accu[i] = expense + accu[i - 1]
+				end
+			end
 		else
-			accu[i] = expense + accu[i - 1]
+			accu = [0]
 		end
-	end
 	accu
 end
 
@@ -226,6 +259,8 @@ end
 			 dateString = "#{month} #{year}"
 			 if targetDate == dateString
 				accu << expense
+			else
+				accu << [0]
 			 end
 		 end
 		 accu

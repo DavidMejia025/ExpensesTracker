@@ -73,7 +73,8 @@ end
 
   private
   def expense_params
-    params.require(:expense).permit(:type_of_tran_id,:category_id,:concept,:amount,:date).merge(user_id: current_user.id)
+    type_of_tran = TypeOfTran.find(params[:expense][:type_of_tran_id]).name
+    params.require(:expense).permit(:type_of_tran_id,:category_id,:concept,:amount,:date).merge(user_id: current_user.id,type_of_trans:type_of_tran)
 
   end
 
