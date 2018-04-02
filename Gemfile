@@ -22,12 +22,12 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5.x'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 #gem faker to use faker plugin
-gem 'faker'
 #Authentication managment system devise
 gem 'devise'
 #Charts
@@ -43,9 +43,12 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+gem 'byebug'
   # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'rspec-rails', '~> 3.5.2'
+gem 'factory_girl_rails', '~> 4.5.0'
+
 end
 
 group :development do
@@ -55,6 +58,17 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'capybara', '~> 2.7', '>= 2.7.1'
+  gem 'selenium-webdriver', '2.53.4'
+  gem 'rspec-wait', '0.0.9'
+  gem 'rspec-retry', '0.5.2'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

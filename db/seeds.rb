@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'faker'
+
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
  TypeOfTran.create!(name:"Withdraw")
@@ -32,4 +34,3 @@
 							 type_of_tran_id:rand(low_t..high_t)
 							 )
 	end
- 

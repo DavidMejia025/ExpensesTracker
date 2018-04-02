@@ -73,6 +73,9 @@ end
 
   private
   def expense_params
+    type_of_tran = TypeOfTran.find(params[:expense][:type_of_tran_id]).name
+    puts "!!!!!!!!!!"
+    puts type_of_tran
     params.require(:expense).permit(:type_of_tran_id,:category_id,:concept,:amount,:date).merge(user_id: current_user.id)
 
   end
