@@ -1,19 +1,26 @@
 module DashboardHelper
 
 	def dayExpense(expenses,day)
+
 		monthBase = expenses.first.date.month
 		month_0 = month_format(monthBase).capitalize
 		year_0 = expenses.first.date.year
 		targetDate_0 = "#{month_0} #{year_0}"
+    
 		data_0 = filterDateMonth(expenses, targetDate_0)
 		month_1 = month_format(checkMonth( monthBase - 1)).capitalize
 		year_1 = checkYear(year_0, monthBase - 1)
 		targetDate_1 = "#{month_1} #{year_1}"
 		data_1 = filterDateMonth(expenses, targetDate_1)
+
 		if day=="hoy"
 			data_0 = filterByDay(data_0)[-1]
 		elsif day=="ayer"
-			data_0 = filterByDay(data_0)[-2]
+      unless filterByDay(data_0)[-2]
+			  data_0 = 0
+      else
+        data_0 = filterByDay(data_0)[-2]
+      end
 		elsif day=="mes_actual"
 			filterByDay(data_0).sum
 		else
@@ -29,14 +36,14 @@ module DashboardHelper
 
 	def data1(expenses)
 		#Filter by month
+    
 		month_0 = expenses.first.date.month
 		year_0 = expenses.first.date.year
 		dataTest = []
-
 		TypeOfTran.all.each do |tran|
 		tran_id_exist = false
 			expenses.each do |expense|
-				if expense.type_of_tran_id == tran.id
+				if expense.type_of_tran.id == tran.id
 					tran_id_exist = true
 				end
 			end
@@ -46,23 +53,21 @@ module DashboardHelper
 					dataTest << [0,0,0]
 				end
 		end
-
 		accu = []
-
-		dataTest.each do |expense|
-			expense.each_with_index do |data,i|
+    
+		dataTest.each do |datas|
+      datas.each_with_index do |data,i|
 				month = checkMonth(month_0-2+i)
 				year = checkYear(year_0, month_0-2+i)
 					# accu << {x: month, y: data}
 					accu << {label: month_format(month), y: data}
 				end
-			end
+      end
 		accu
 	end
 
 
 	def transactionData(expenses,month_0,year_0,tran_id)
-    byebug
 	expensesByTransaction = filterByTransaction(expenses, tran_id)
 	expensesMonthCero = filterByMonth(expensesByTransaction, month_0, year_0, 0)
 	expensesMonthOne = filterByMonth(expensesByTransaction, month_0, year_0, 1)
@@ -77,6 +82,7 @@ module DashboardHelper
     if expenses == []
       expenses = [0]
     end
+    expenses
 	end
 
 	def totalAmount(expenses)
@@ -96,22 +102,38 @@ module DashboardHelper
 						month = month_format(expenses.first.date.month).capitalize
 						targetDate = "#{month} #{year_0}"
 						filterExpenses = filterDateMonth(expenses, targetDate)
+            unless filterExpenses
+              filterExpenses = [0]
+            else
+              filterExpenses
+            end
+
 					elsif i == 1
 						months = month_0 - i
 						month = checkMonth(months)
 						year = checkYear(year_0, months)
 						month = month_format(month).capitalize
 						targetDate = "#{month} #{year}"
-					filterExpenses2 = filterDateMonth(expenses, targetDate)
+					  filterExpenses2 = filterDateMonth(expenses, targetDate)
+            unless filterExpenses2
+              filterExpenses2 = [0]
+            else
+              filterExpenses2
+            end
 					elsif i == 2
 						months = month_0 - i
 						month = checkMonth(months)
 						year = checkYear(year_0, months)
 						month = month_format(month).capitalize
 						targetDate = "#{month} #{year}"
-					filterExpenses3 = filterDateMonth(expenses, targetDate)
-						end
-			end
+					  filterExpenses3 = filterDateMonth(expenses, targetDate)
+            unless filterExpenses3
+              filterExpense3s = [0]
+            else
+              filterExpenses3
+            end
+					end
+	end
 
 
 	def checkMonth(month)
@@ -186,10 +208,9 @@ end
 		data = []
 		data[0] = dataSet(sumExpenses(filterByDay(data_0)))
     unless data_1 == nil || data_1 == []
-      byebug
       data[1] = dataSet(sumExpenses(filterByDay(data_1)))
     else
-      byebug
+      
       data[1] = 0
     end
 		
@@ -253,16 +274,18 @@ end
 
 	def filterDateMonth(expenses,targetDate)
 		accu =[]
+    
 		 expenses_filter = expenses.each do |expense|
 			 month= month_format(expense.date.month).capitalize
 			 year = expense.date.year
 			 dateString = "#{month} #{year}"
 			 if targetDate == dateString
 				accu << expense
-			else
-				accu << [0]
 			 end
 		 end
+     if accu == [] 
+      accu << [0]
+    end
 		 accu
 	end
 
