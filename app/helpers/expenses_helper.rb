@@ -54,6 +54,7 @@ end
 def nameDate(expenses)
 	 date_0 = expenses.map do |expense|
 	 month= month_format(expense.date.month).capitalize
+
 	 year = expense.date.year
 	 "#{month} #{year}"
 	end
@@ -78,7 +79,7 @@ end
  def instanceName(instances)
  	string= ""
  	instances.each do |type|
- 		name = type.name 
+ 		name = type.name
  		puts name
  	 	string = string.concat(""+name+""+", ")
  	 end

@@ -25,12 +25,12 @@ RSpec.describe Expense, type: :model do
   # it { expense.should validate_presence_of(:concept) }
 
   describe "concept is string" do
-    expense = Expense.create(date:10/2/2017, concept:"toy", amount:15)
+    expense = Expense.create(category_id:1, type_of_tran_id:1, date:"10/2/2017", concept:"toy", amount:15)
     it {expect(expense.concept.instance_of? String).to eq(true)}
   end
 
-  describe "comcept presence true" do
-    expense = Expense.create(date:10/2/2017, concept:"toy", amount:15)
+  describe "concept presence true" do
+    expense = Expense.create(category_id:2, type_of_tran_id:2, date:"10/2/2017", concept:"spiderman", amount:15)
     it { expect(expense.concept == nil).to eq(false)}
   end
 
