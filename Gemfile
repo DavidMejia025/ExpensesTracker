@@ -48,6 +48,7 @@ gem 'byebug'
 gem 'sqlite3'
 gem 'rspec-rails', '~> 3.5.2'
 gem 'factory_girl_rails', '~> 4.5.0'
+gem 'rails-controller-testing'
 
 end
 

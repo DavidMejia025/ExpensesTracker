@@ -12,4 +12,4 @@ class ExpenseTest < ActiveSupport::TestCase
     @expense = Expense.create(date:10/2/2017,concept:"toy", amount:15)
     assert(@expense.concept)
   end
-end
+end 
