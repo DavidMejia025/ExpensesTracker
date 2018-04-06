@@ -18,11 +18,7 @@ class UserAuthenticationTest < ActionDispatch::IntegrationTest
      follow_redirect!
      assert_equal '/', path
      get expenses_path
-     
+
      assert_select ".count", "0"
    end
-   def root_search
-    root = request.env["PATH_INFO"]
-    puts root
-  end
  end

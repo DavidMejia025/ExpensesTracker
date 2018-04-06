@@ -67,6 +67,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara', '~> 2.7', '>= 2.7.1'
   gem 'selenium-webdriver', '2.53.4'
+  gem 'chromedriver-helper'
   gem 'rspec-wait', '0.0.9'
   gem 'rspec-retry', '0.5.2'
   gem 'faker'
