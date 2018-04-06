@@ -8,6 +8,7 @@ gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 gem 'puma'
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'pg', '~> 0.21.0'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -37,9 +38,9 @@ gem 'active_median', '~> 0.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :production do
-  gem 'pg','0.21.0'
-end
+# group :production do
+#   gem 'pg','0.21.0'
+# end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,7 +50,6 @@ gem 'sqlite3'
 gem 'rspec-rails', '~> 3.5.2'
 gem 'factory_girl_rails', '~> 4.5.0'
 gem 'rails-controller-testing'
-
 end
 
 group :development do
@@ -71,6 +71,7 @@ group :test do
   gem 'rspec-wait', '0.0.9'
   gem 'rspec-retry', '0.5.2'
   gem 'faker'
+  gem 'minitest-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
