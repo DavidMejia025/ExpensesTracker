@@ -13,7 +13,7 @@ module ExpensesHelper
 				 10 => "Oct",
 				 11 => "Nov",
 				 12 => "Dic"}
-		month[date_month].upcase
+		month[date_month].upcase 
 	end
 
 	def month_format2(date_month)
@@ -29,7 +29,7 @@ module ExpensesHelper
 				 "Oct" => 10,
 				 "Nov" => 11,
 				 "Dic" => 12}
-		month[date_month].upcase
+		month[date_month].upcase 
 	end
 
 	# I want to learn how to pick an specific row in rails

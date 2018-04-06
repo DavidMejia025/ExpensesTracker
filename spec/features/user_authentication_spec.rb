@@ -7,15 +7,24 @@ RSpec.describe "user_authentication", type: :feature do
   TypeOfTran.create(name:"withdraw")
   # Expense.create(concept:"food", date:"06/06/2014", amount:120000, user_id:1)
 
-  it "signs me in" do
-    User.create(email:"sol@one.com", password:"test5678")
-    visit new_user_session_path
-    fill_in "user_email", with: "sol@one.com"
-    fill_in "user_password", with: "test5678"
-    find('input[type="submit"]').click
-    sleep 5
-    expect(current_path).to eq root_path
+  User.create(email:"luna@one.com", password:"test1234")
+  Category.create(name:"food")
+  TypeOfTran.create(name:"withdraw")
+  #Expense.create(concept:"food", date:"06/06/2017", amount:120000, user_id:1)
 
+  # it "signs me in" do
+  #   visit new_user_session_path
+
+  #   fill_in "user_email", with: "luna@one.com"
+  #   fill_in "user_password", with: "test1234"
+  #   find('input[type="submit"]').click
+  #   expect(current_path).to eq root_path
+  # end
+ it "Create expense" do
+    visit expenses_path
+    fill_in "user_email", with: "luna@one.com"
+    fill_in "user_password", with: "test1234"
+    find('input[type="submit"]').click
     visit expenses_path
     find('button.btn.btn-success.pull-left').click
     select "2018", :from => "expense_date_1i"
