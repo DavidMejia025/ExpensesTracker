@@ -37,7 +37,7 @@ gem 'groupdate', '~> 2.1.1'
 gem 'active_median', '~> 0.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'faker'
 # group :production do
 #   gem 'pg','0.21.0'
 # end
@@ -70,7 +70,6 @@ group :test do
   gem 'chromedriver-helper'
   gem 'rspec-wait', '0.0.9'
   gem 'rspec-retry', '0.5.2'
-  gem 'faker'
   gem 'minitest-rails'
 end
 
