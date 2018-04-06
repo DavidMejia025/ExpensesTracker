@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+Expense.destroy_all
+Category.destroy_all
+TypeOfTran.destroy_all
+User.destroy_all
 
  category = ["Restaurant", "Public services","Shopping", "Home", "Education", "Fun" , "Travel"]
  type_of = ["withdraw","Purchase"]
@@ -22,11 +26,12 @@ require 'faker'
  low = Category.first.id
  high = Category.last.id
 
- # user1= User.create!(email:"ang@gmail.com",password:12345678)
- # user2= User.create!(email:"nicol@one.com",password: 123456)
- # user3= User.create!(email:"fer@one.com",password:123456)
- user= [User.first, User.find(4), User.last]
-	1000.times do
+ user1= User.create!(email:"ang@gmail.com",password:12345678)
+ user2= User.create!(email:"nicol@one.com",password: 123456)
+ user3= User.create!(email:"fer@one.com",password:123456)
+ user= [User.first, User.find(User.last.id-1), User.last]
+
+  1000.times do
 		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
 							 date: Faker::Date.backward(200),

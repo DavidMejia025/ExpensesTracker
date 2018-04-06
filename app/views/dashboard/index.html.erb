@@ -10,26 +10,26 @@
     <div class="total-box col-md-3">
       <% if @expenses.first %>
         <p class="hoy1">$<%= dayExpense(@expenses,"hoy") %></p>
-      <span>HOY</span>
+      <span>TODAY</span>
     <% end %>
     </div>
     <div class="total-box col-md-3">
       <% if @expenses.first %>
         $<%= dayExpense(@expenses,"ayer") %>
       <% end %>
-      <span>AYER</span>
+      <span>YESTERDAY</span>
     </div>
     <div class="total-box col-md-3">
       <% if @expenses.first %>
         $<%= dayExpense(@expenses,"mes_actual") %>
       <% end %>
-      <span>ESTE MES</span>
+      <span>THIS MONTH</span>
     </div>
     <div class="total-box col-md-3">
       <% if @expenses.first %>
         $<%= dayExpense(@expenses,"anterior") %>
       <% end %>
-      <span>MES PASADO</span>
+      <span>LAST MONTH</span>
     </div>
   </div>
 

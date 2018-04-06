@@ -32,7 +32,7 @@
             <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li>
             <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Expenses", expenses_path %></li>
             <% if user_signed_in?%>
-             <h4> Hola <%= current_user.email %> Espero que te encuentres muy bien hoy </h4>
+             <h4> Hola <%= current_user.email %> I hope that you have a great day </h4>
             <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
