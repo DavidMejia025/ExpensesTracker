@@ -44,7 +44,6 @@ end
 
   def edit
     @expense = Expense.find(params[:id])
-
       respond_to do |format|
       format.js
     end

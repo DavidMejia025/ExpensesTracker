@@ -31,7 +31,7 @@ User.destroy_all
  user3= User.create!(email:"fer@one.com",password:123456)
  user= [User.first, User.find(User.last.id-1), User.last]
 
-  1000.times do
+  30.times do
 		user.sample.expenses.create(amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
 							 date: Faker::Date.backward(200),

@@ -1,5 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-<% 1.upto(1000) do |i| %>
+<% 1.upto(10) do |i| %>
   expense_<%= i %>:
     concept: "Food"
     amount: 345
