@@ -32,10 +32,11 @@ User.destroy_all
  user= [User.first, User.find(User.last.id-1), User.last]
 
   30.times do
-		user.sample.expenses.create(amount: Faker::Number.number(5),
+		user.sample.expenses.create(
+              amount: Faker::Number.number(5),
 							 concept: Faker::Commerce.product_name,
 							 date: Faker::Date.backward(200),
 							 category_id: rand(low..high),
 							 type_of_tran_id:rand(low_t..high_t)
-							 )
+		)
 	end
