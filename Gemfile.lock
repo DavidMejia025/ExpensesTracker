@@ -61,7 +61,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
-    chartkick (1.2.5)
+    chartkick (3.3.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (2.1.1)
@@ -283,7 +283,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
   capybara (~> 2.7, >= 2.7.1)
-  chartkick (~> 1.2.4)
+  chartkick (~> 3.3.0)
   chromedriver-helper
   coffee-rails (~> 4.1.0)
   database_cleaner
